@@ -1,6 +1,5 @@
 package com.bca.popularmovie.adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.popularmovie.R;
-import com.bca.popularmovie.delegate.GeneralCallback;
+import com.bca.popularmovie.delegate.MovieCallback;
 import com.bca.popularmovie.holder.MovieViewHolder;
 import com.bca.popularmovie.model.Movie;
 
@@ -18,14 +17,14 @@ import java.util.List;
 
 public class MovieAdapter extends RecyclerView.Adapter {
 
-    private GeneralCallback callback = null;
+    private MovieCallback callback = null;
     private List<Movie> arrMovies = new ArrayList<>();
 
     public void setData(List<Movie> arrMovie){
         arrMovies = arrMovie;
     }
 
-    public void setCallback(GeneralCallback callbackDelegate){
+    public void setCallback(MovieCallback callbackDelegate){
         this.callback = callbackDelegate;
     }
 

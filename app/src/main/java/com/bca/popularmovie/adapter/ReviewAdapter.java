@@ -1,6 +1,5 @@
 package com.bca.popularmovie.adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +8,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.popularmovie.R;
-import com.bca.popularmovie.delegate.GeneralCallback;
+import com.bca.popularmovie.delegate.MovieCallback;
 import com.bca.popularmovie.holder.ReviewViewHolder;
 import com.bca.popularmovie.model.Review;
 
@@ -18,15 +17,9 @@ import java.util.List;
 
 public class ReviewAdapter extends RecyclerView.Adapter {
 
-    private GeneralCallback callback = null;
     private List<Review> arrReviews = new ArrayList<>();
-
-    public void setDataReview(List<Review> arrString){
+    public void setDataReview(List<Review> arrString) {
         arrReviews = arrString;
-    }
-
-    public void setCallback(GeneralCallback callbackDelegate){
-        this.callback = callbackDelegate;
     }
 
     @NonNull
@@ -40,17 +33,8 @@ public class ReviewAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-
         Review review = arrReviews.get(position);
-        ((ReviewViewHolder)holder).setData(review.getAuthor(), review.getContent());
-        ((ReviewViewHolder)holder).getView().setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (callback != null) {
-                }
-            }
-        });
-
+        ((ReviewViewHolder) holder).setData(review.getAuthor(), review.getContent());
     }
 
     @Override

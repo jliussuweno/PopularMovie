@@ -1,6 +1,5 @@
 package com.bca.popularmovie.adapter;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,7 +8,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.popularmovie.R;
-import com.bca.popularmovie.delegate.GeneralCallback;
+import com.bca.popularmovie.delegate.MovieCallback;
+import com.bca.popularmovie.delegate.TrailerCallback;
 import com.bca.popularmovie.holder.TrailerViewHolder;
 import com.bca.popularmovie.model.Trailer;
 
@@ -18,14 +18,14 @@ import java.util.List;
 
 public class TrailerAdapter extends RecyclerView.Adapter {
 
-    private GeneralCallback callback = null;
+    private TrailerCallback callback = null;
     private List<Trailer> arrTrailers = new ArrayList<>();
 
     public void setDataTrailers(List<Trailer> arrString){
         arrTrailers = arrString;
     }
 
-    public void setCallback(GeneralCallback callbackDelegate){
+    public void setCallback(TrailerCallback callbackDelegate){
         this.callback = callbackDelegate;
     }
 

@@ -1,4 +1,4 @@
-package com.bca.popularmovie;
+package com.bca.popularmovie.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -8,32 +8,19 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ProgressBar;
 
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.bca.popularmovie.viewmodel.MainViewModel;
+import com.bca.popularmovie.R;
 import com.bca.popularmovie.adapter.MovieAdapter;
-import com.bca.popularmovie.delegate.GeneralCallback;
+import com.bca.popularmovie.delegate.MovieCallback;
 import com.bca.popularmovie.model.Movie;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements GeneralCallback, Serializable {
+public class MainActivity extends AppCompatActivity implements MovieCallback, Serializable {
 
     private static final String TAG = "JEJE";
     private MovieAdapter adapter = new MovieAdapter();
@@ -120,10 +107,5 @@ public class MainActivity extends AppCompatActivity implements GeneralCallback, 
         Intent intent = new Intent(MainActivity.this, DescriptionActivity.class);
         intent.putExtra("movie", (Serializable) movies);
         startActivity(intent);
-    }
-
-    @Override
-    public void trailerPressed(String id) {
-
     }
 }

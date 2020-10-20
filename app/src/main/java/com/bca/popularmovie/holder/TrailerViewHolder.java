@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bca.popularmovie.R;
 
-public class TrailerViewHolder extends RecyclerView.ViewHolder{
+public class TrailerViewHolder extends RecyclerView.ViewHolder {
     TextView textView;
     View parent;
 
@@ -20,16 +20,11 @@ public class TrailerViewHolder extends RecyclerView.ViewHolder{
         parent = itemView;
     }
 
-    public void setData(String trailers){
-        if (trailers.isEmpty()){
-            textView.setText("Don't have trailer yet.");
-        } else {
-            textView.setText(trailers.trim());
-        }
-
+    public void setData(String trailers) {
+        textView.setText(trailers.trim());
     }
 
-    public View getView(){
+    public View getView() {
         return parent;
     }
 

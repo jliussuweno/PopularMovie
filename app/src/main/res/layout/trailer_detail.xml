@@ -9,7 +9,6 @@
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
         android:layout_marginBottom="10dp"
         android:textColor="@color/purple_700"
         android:textAlignment="textStart"

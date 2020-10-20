@@ -12,7 +12,7 @@ import androidx.sqlite.db.SupportSQLiteOpenHelper;
 
 import com.bca.popularmovie.model.Movie;
 
-@Database(entities = {Movie.class}, version = 1)
+@Database(entities = {Movie.class}, version = 1, exportSchema = false)
 public abstract class ApplicationDatabase extends RoomDatabase {
 
     private static ApplicationDatabase instance = null;

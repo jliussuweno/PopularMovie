@@ -12,7 +12,7 @@ import com.bca.popularmovie.R;
 
 import static android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD;
 
-public class ReviewViewHolder extends RecyclerView.ViewHolder{
+public class ReviewViewHolder extends RecyclerView.ViewHolder {
     TextView textView;
     View parent;
 
@@ -23,18 +23,12 @@ public class ReviewViewHolder extends RecyclerView.ViewHolder{
         parent = itemView;
     }
 
-    public void setData(String author, String content){
+    public void setData(String author, String content) {
         textView.setJustificationMode(JUSTIFICATION_MODE_INTER_WORD);
-        Log.d("KOSONG", "setData: " + content);
-        if (content.isEmpty()){
-            textView.setText("Don't have reviews yet.");
-        } else {
-            textView.setText("Content: " + content.trim() + "\n\nAuthor: " + author.trim());
-        }
-
+        textView.setText("Review: " + content.trim() + "\n\nAuthor: " + author.trim());
     }
 
-    public View getView(){
+    public View getView() {
         return parent;
     }
 

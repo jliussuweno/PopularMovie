@@ -1,4 +1,4 @@
-package com.bca.popularmovie;
+package com.bca.popularmovie.viewmodel;
 
 import android.app.Application;
 import android.content.Context;
@@ -82,6 +82,11 @@ public class DescriptionViewModel extends AndroidViewModel {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                        if (arrTrailers.size() == 0){
+                            arrTrailers.add(new Trailer("X-vO-MPbob4", "Don't have trailers yet."));
+                        }
+
                         dataTrailer.postValue(arrTrailers);
                     }
                 }, new Response.ErrorListener() {
@@ -119,7 +124,13 @@ public class DescriptionViewModel extends AndroidViewModel {
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
+
+                        if (arrReview.size() == 0){
+                            arrReview.add(new Review("-", "Don't have reviews yet."));
+                        }
+
                         dataReview.postValue(arrReview);
+
                     }
                 }, new Response.ErrorListener() {
             @Override

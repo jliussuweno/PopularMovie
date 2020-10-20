@@ -1,4 +1,4 @@
-package com.bca.popularmovie;
+package com.bca.popularmovie.viewmodel;
 
 import android.app.Application;
 import android.content.Context;
@@ -60,7 +60,7 @@ public class MainViewModel extends AndroidViewModel implements Serializable {
         return dataFavorite;
     }
 
-    void initDataPopular(){
+    public void initDataPopular(){
         RequestQueue queue = Volley.newRequestQueue(context);
         String url ="https://api.themoviedb.org/3/movie/popular?api_key=363a304bf3803692ae784f270971be88";
 
@@ -95,7 +95,7 @@ public class MainViewModel extends AndroidViewModel implements Serializable {
         queue.add(stringRequest);
     }
 
-    void initDataTopRated(){
+    public void initDataTopRated(){
         RequestQueue queue = Volley.newRequestQueue(context);
         String url ="https://api.themoviedb.org/3/movie/top_rated?api_key=363a304bf3803692ae784f270971be88";
 
@@ -136,7 +136,7 @@ public class MainViewModel extends AndroidViewModel implements Serializable {
         queue.add(stringRequest);
     }
 
-    void initDataFavorite(){
+    public void initDataFavorite(){
         ApplicationDatabase db = ApplicationDatabase.getInstance(context);
         mMovieDao = db.moviesDao();
         dataFavorite = mMovieDao.selectMovies();

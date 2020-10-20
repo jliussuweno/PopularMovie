@@ -1,4 +1,4 @@
-package com.bca.popularmovie;
+package com.bca.popularmovie.view;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.ScaleAnimation;
@@ -18,21 +17,22 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.ToggleButton;
 
+import com.bca.popularmovie.viewmodel.DescriptionViewModel;
+import com.bca.popularmovie.R;
 import com.bca.popularmovie.adapter.ReviewAdapter;
 import com.bca.popularmovie.adapter.TrailerAdapter;
-import com.bca.popularmovie.delegate.GeneralCallback;
+import com.bca.popularmovie.delegate.TrailerCallback;
 import com.bca.popularmovie.model.Movie;
 import com.bca.popularmovie.model.Review;
 import com.bca.popularmovie.model.Trailer;
 import com.squareup.picasso.Picasso;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 import static android.graphics.text.LineBreaker.JUSTIFICATION_MODE_INTER_WORD;
 
-public class DescriptionActivity extends AppCompatActivity implements GeneralCallback, Serializable {
+public class DescriptionActivity extends AppCompatActivity implements TrailerCallback, Serializable {
 
     private static final String TAG = "JEJE";
     TextView tv_title, tv_releasedate, tv_rating, tv_description;
@@ -80,7 +80,6 @@ public class DescriptionActivity extends AppCompatActivity implements GeneralCal
         rv_trailers.setAdapter(trailerAdapter);
 
         reviewAdapter = new ReviewAdapter();
-        reviewAdapter.setCallback(this);
         rv_reviews.setAdapter(reviewAdapter);
 
         descriptionViewModel = new ViewModelProvider(this).get(DescriptionViewModel.class);
@@ -119,11 +118,6 @@ public class DescriptionActivity extends AppCompatActivity implements GeneralCal
                 }
             }
         });
-
-    }
-
-    @Override
-    public void itemPressed(Movie movies) {
 
     }
 
