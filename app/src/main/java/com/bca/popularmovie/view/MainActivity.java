@@ -44,7 +44,14 @@ public class MainActivity extends AppCompatActivity implements MovieCallback, Se
         obj_recyclerview.setAdapter(adapter);
 
         mainViewModel = new ViewModelProvider(this).get(MainViewModel.class);
-        initDataPopular();
+//        initDataPopular();
+        mainViewModel.getDataPopular().observe(this, new Observer<List<Movie>>() {
+            @Override
+            public void onChanged(List<Movie> movies) {
+                adapter.setData(movies);
+                adapter.notifyDataSetChanged();
+            }
+        });
     }
 
     private void initDataPopular(){
