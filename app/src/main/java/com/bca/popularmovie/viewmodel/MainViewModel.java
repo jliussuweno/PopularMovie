@@ -18,8 +18,6 @@ import com.android.volley.toolbox.Volley;
 import com.bca.popularmovie.database.ApplicationDatabase;
 import com.bca.popularmovie.database.MoviesDao;
 import com.bca.popularmovie.model.Movie;
-import com.bca.popularmovie.model.Review;
-import com.bca.popularmovie.model.Trailer;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -43,9 +41,9 @@ public class MainViewModel extends AndroidViewModel implements Serializable {
         dataTop = new MutableLiveData<>();
         dataPopular = new MutableLiveData<>();
         context = application.getApplicationContext();
-//        ApplicationDatabase db = ApplicationDatabase.getInstance(context);
-//        mMovieDao = db.moviesDao();
-//        dataFavorite = mMovieDao.selectMovies();
+        ApplicationDatabase db = ApplicationDatabase.getInstance(context);
+        mMovieDao = db.moviesDao();
+        initDataPopular();
     }
 
     public LiveData<List<Movie>> getDataTop() {
@@ -137,8 +135,6 @@ public class MainViewModel extends AndroidViewModel implements Serializable {
     }
 
     public void initDataFavorite(){
-        ApplicationDatabase db = ApplicationDatabase.getInstance(context);
-        mMovieDao = db.moviesDao();
         dataFavorite = mMovieDao.selectMovies();
     }
 }

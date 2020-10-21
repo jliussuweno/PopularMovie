@@ -1,11 +1,13 @@
 package com.bca.popularmovie.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.app.ActionBar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
@@ -26,6 +28,8 @@ public class MainActivity extends AppCompatActivity implements MovieCallback, Se
     private MovieAdapter adapter = new MovieAdapter();
     MainViewModel mainViewModel;
     RecyclerView obj_recyclerview;
+    Boolean favoriteFlag = false;
+    String stateMovie = "Popular Movie";
     private final GridLayoutManager gridLayoutManager = new GridLayoutManager(this,2);
 
 
@@ -44,6 +48,8 @@ public class MainActivity extends AppCompatActivity implements MovieCallback, Se
     }
 
     private void initDataPopular(){
+        favoriteFlag = false;
+        stateMovie = "Popular Movie";
         mainViewModel.initDataPopular();
         mainViewModel.getDataPopular().observe(this, new Observer<List<Movie>>() {
             @Override
@@ -55,6 +61,8 @@ public class MainActivity extends AppCompatActivity implements MovieCallback, Se
     }
 
     private void  initDataTopRated(){
+        favoriteFlag = false;
+        stateMovie = "Top Rated Movie";
         mainViewModel.initDataTopRated();
         mainViewModel.getDataTop().observe(this, new Observer<List<Movie>>() {
             @Override
@@ -66,12 +74,16 @@ public class MainActivity extends AppCompatActivity implements MovieCallback, Se
     }
 
     private void  initDataFavorite(){
+        favoriteFlag = true;
+        stateMovie = "Favorite Movie";
         mainViewModel.initDataFavorite();
         mainViewModel.getDataFavorit().observe(this, new Observer<List<Movie>>() {
             @Override
             public void onChanged(List<Movie> movies) {
-                adapter.setData(movies);
-                adapter.notifyDataSetChanged();
+                if (favoriteFlag){
+                    adapter.setData(movies);
+                    adapter.notifyDataSetChanged();
+                }
             }
         });
     }
@@ -84,18 +96,22 @@ public class MainActivity extends AppCompatActivity implements MovieCallback, Se
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        String titleBar = "";
         switch (item.getItemId()) {
             case R.id.popular_item:
-                item.setTitle("Popular Movie");
                 initDataPopular();
+                item.setTitle("Popular Movie");
+                getSupportActionBar().setTitle("Popular Movie");
                 return true;
             case R.id.top_rated_item:
                 initDataTopRated();
                 item.setTitle("Top Rated Movie");
+                getSupportActionBar().setTitle("Top Rated Movie");
                 return true;
             case R.id.favorite:
                 initDataFavorite();
                 item.setTitle("Favorite Movie");
+                getSupportActionBar().setTitle("Favorite Movie");
                 return true;
             default:
                 return super.onOptionsItemSelected(item);
@@ -106,6 +122,7 @@ public class MainActivity extends AppCompatActivity implements MovieCallback, Se
     public void itemPressed(Movie movies) {
         Intent intent = new Intent(MainActivity.this, DescriptionActivity.class);
         intent.putExtra("movie", (Serializable) movies);
+        intent.putExtra("titleBar", stateMovie);
         startActivity(intent);
     }
 }

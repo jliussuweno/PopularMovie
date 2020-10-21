@@ -1,5 +1,7 @@
 package com.bca.popularmovie.view;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -9,6 +11,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.animation.Animation;
 import android.view.animation.BounceInterpolator;
 import android.view.animation.ScaleAnimation;
@@ -49,7 +52,6 @@ public class DescriptionActivity extends AppCompatActivity implements TrailerCal
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description);
-
         tv_title = findViewById(R.id.tv_title);
         tv_releasedate = findViewById(R.id.textView_releaseDate);
         tv_rating = findViewById(R.id.textView_rating);
@@ -67,6 +69,7 @@ public class DescriptionActivity extends AppCompatActivity implements TrailerCal
 
         Intent intent = getIntent();
         Movie movie = (Movie) intent.getSerializableExtra("movie");
+        String titleBar = intent.getStringExtra("titleBar");
         String id = movie.getId();
         tv_title.setText(movie.getTitle());
         tv_releasedate.setText(movie.getReleaseDate());
@@ -81,6 +84,8 @@ public class DescriptionActivity extends AppCompatActivity implements TrailerCal
 
         reviewAdapter = new ReviewAdapter();
         rv_reviews.setAdapter(reviewAdapter);
+
+//        getActionBar().setTitle(titleBar);
 
         descriptionViewModel = new ViewModelProvider(this).get(DescriptionViewModel.class);
         descriptionViewModel.initDataTrailers(id);
@@ -118,7 +123,14 @@ public class DescriptionActivity extends AppCompatActivity implements TrailerCal
                 }
             }
         });
+    }
 
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        if (item.getItemId() == android.R.id.home) {
+            onBackPressed();
+        }
+        return true;
     }
 
     @Override
